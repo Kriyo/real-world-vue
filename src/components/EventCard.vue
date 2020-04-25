@@ -12,6 +12,7 @@
 </template>
 
 <script>
+console.log(event)
 export default {
   props: {
     event: Object
@@ -19,7 +20,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .event-card {
   padding: 20px;
   margin-bottom: 24px;
@@ -33,7 +34,6 @@ export default {
 .event-card > .title {
   margin: 0;
 }
-
 .event-link {
   color: black;
   text-decoration: none;

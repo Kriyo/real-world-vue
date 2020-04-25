@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import EventService from '@/services/EventService.js'
 
 Vue.use(Vuex)
 
@@ -28,8 +29,17 @@ export default new Vuex.Store({
       { id: 4, text: '...', organiser: '...' }
     ]
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    ADD_EVENT(state, event) {
+      state.events.push(event)
+    }
+  },
+  actions: {
+    createEvent({ commit }, event) {
+      EventService.postEvent(event) // POST to the API to update the jSON data
+      commit('ADD_EVENT', event) // Commit the mutation
+    }
+  },
   getters: {
     catLength: state => {
       return state.categories.length
