@@ -1,5 +1,5 @@
 <template>
-  <div v-if="events">
+  <div>
     <h1>Events Listing</h1>
     <EventCard v-for="event in events" :event="event" :key="event.id" />
     <BaseIcon />
