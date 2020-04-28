@@ -56,14 +56,20 @@ export default new Vuex.Store({
           console.log('::> Error fetching all events:', err.response)
         })
     },
-    fetchEvent({ commit }, id) {
-      EventService.getEvent(id)
-        .then(res => {
-          commit('SET_EVENT', res.data)
-        })
-        .catch(err => {
-          console.log('::> Error fetching single event: ', err.response)
-        })
+    fetchEvent({ commit, getters }, id) {
+      var event = getters.getEventById(id)
+
+      if (event) {
+        commit('SET_EVENT', event)
+      } else {
+        EventService.getEvent(id)
+          .then(res => {
+            commit('SET_EVENT', res.data)
+          })
+          .catch(err => {
+            console.log('::> Error fetching single event: ', err.response)
+          })
+      }
     }
   },
   getters: {
