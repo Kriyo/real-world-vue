@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="events">
     <h1>Events Listing</h1>
     <EventCard v-for="event in events" :event="event" :key="event.id" />
     <BaseIcon />
@@ -8,22 +8,15 @@
 
 <script>
 import EventCard from '@/components/EventCard.vue'
-import EventService from '@/services/EventService.js'
+import { mapState } from 'vuex'
+
 export default {
   components: {
     EventCard
   },
-  data() {
-    return { events: [] }
-  },
   created() {
-    EventService.getEvents()
-      .then(res => {
-        this.events = res.data
-      })
-      .catch(error => {
-        console.log('::> Errors:', error)
-      })
-  }
+    this.$store.dispatch('fetchEvents')
+  },
+  computed: mapState(['events'])
 }
 </script>

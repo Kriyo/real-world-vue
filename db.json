@@ -74,6 +74,34 @@
     },
     {
       "id": 8419989
+    },
+    {
+      "id": 5728934,
+      "category": "housing",
+      "organizer": {
+        "id": "abc123",
+        "name": "Chris Kennedy"
+      },
+      "title": "123",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "6:00",
+      "attendees": []
+    },
+    {
+      "id": 1433351,
+      "category": "housing",
+      "organizer": {
+        "id": "abc123",
+        "name": "Chris Kennedy"
+      },
+      "title": "Test",
+      "description": "Desc",
+      "location": "Water",
+      "date": "2020-04-04T20:40:00.000Z",
+      "time": "8:00",
+      "attendees": []
     }
   ]
 }

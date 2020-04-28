@@ -22,22 +22,32 @@ export default new Vuex.Store({
       { id: 3, text: '...', done: true },
       { id: 4, text: '...', done: false }
     ],
-    events: [
-      { id: 1, title: '...', organiser: '...' },
-      { id: 2, text: '...', organiser: '...' },
-      { id: 3, text: '...', organiser: '...' },
-      { id: 4, text: '...', organiser: '...' }
-    ]
+    events: []
   },
   mutations: {
     ADD_EVENT(state, event) {
+      console.log('::> mutation add event: ', event)
       state.events.push(event)
+    },
+    SET_EVENTS(state, events) {
+      state.events = events
     }
   },
   actions: {
     createEvent({ commit }, event) {
-      EventService.postEvent(event) // POST to the API to update the jSON data
-      commit('ADD_EVENT', event) // Commit the mutation
+      return EventService.postEvent(event).then(() => {
+        console.log('::> ES postevent: ', event)
+        commit('ADD_EVENT', event)
+      })
+    },
+    fetchEvents({ commit }) {
+      EventService.getEvents()
+        .then(res => {
+          commit('SET_EVENTS', res.data)
+        })
+        .catch(error => {
+          console.log('::> Errors:', error)
+        })
     }
   },
   getters: {
