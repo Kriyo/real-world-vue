@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Events Listing</h1>
+    <h1>Events for {{ user.name }}</h1>
     <EventCard v-for="event in events" :event="event" :key="event.id" />
     <template v-if="page !== 1">
       <router-link :to="{ name: 'event-list', query: { page: page -1 } }" rel="prev">Prev Page</router-link>
@@ -37,7 +37,7 @@ export default {
     isLastPage() {
       return this.totalEvents > this.page * this.perPage
     },
-    ...mapState(['events', 'totalEvents'])
+    ...mapState(['events', 'totalEvents', 'user'])
   }
 }
 </script>
