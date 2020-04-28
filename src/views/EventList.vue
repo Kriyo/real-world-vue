@@ -35,13 +35,6 @@ export default {
       return parseInt(this.$route.query.page) || 1 // check for query param, fallback assumption to first page.
     },
     isLastPage() {
-      console.log('total e: ', this.totalEvents)
-      console.log('this.page', this.page)
-      console.log('perPage', this.perPage)
-      console.log(
-        '::> this.totalEvents > this.page * this.perPage: ',
-        this.totalEvents > this.page * this.perPage
-      )
       return this.totalEvents > this.page * this.perPage
     },
     ...mapState(['events', 'totalEvents'])

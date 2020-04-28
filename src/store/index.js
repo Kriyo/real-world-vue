@@ -33,7 +33,6 @@ export default new Vuex.Store({
       state.events = events
     },
     SET_TOTAL_EVENTS(state, totalEvents) {
-      console.log('::> Set total events sate& total: ', state, totalEvents)
       state.totalEvents = totalEvents
     }
   },
