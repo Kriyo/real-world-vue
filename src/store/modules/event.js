@@ -5,6 +5,7 @@ export const namespaced = true
 export const state = {
   event: {},
   events: [],
+  perPage: 3,
   totalEvents: 0
 }
 
@@ -43,8 +44,8 @@ export const actions = {
         throw err
       })
   },
-  fetchEvents({ commit, dispatch }, { perPage, page }) {
-    EventService.getEvents(perPage, page)
+  fetchEvents({ commit, dispatch, state }, { page }) {
+    return EventService.getEvents(state.perPage, page)
       .then(res => {
         commit('SET_EVENTS', res.data)
         commit('SET_TOTAL_EVENTS', parseInt(res.headers['x-total-count']))
