@@ -4,13 +4,25 @@
     <form @submit.prevent="createEvent">
       <BaseSelect
         label="Select a category"
-        v-model="event.category"
         :options="categories"
-        class="field"
+        v-model="event.category"
+        :class="{ error: $v.event.category.$error }"
+        @blur="$v.event.category.$touch()"
       />
+      <template v-if="$v.event.category.$error">
+        <p v-if="!$v.event.category.required" class="errorMessage">
+          Category is required.
+        </p>
+      </template>
 
       <h3>Name & describe your event</h3>
-      <BaseInput label="Title" type="text" placeholder="Title" v-model="event.title" class="field" />
+      <BaseInput
+        label="Title"
+        type="text"
+        placeholder="Title"
+        v-model="event.title"
+        class="field"
+      />
       <BaseInput
         label="Description"
         type="text"
@@ -34,7 +46,20 @@
         <datepicker v-model="event.date" placeholder="Select a date" />
       </div>
 
-      <BaseSelect label="Select a time" v-model="event.time" :options="times" class="field" />
+      <BaseSelect
+        label="Select a time"
+        v-model="event.time"
+        :options="times"
+        class="field"
+        :class="{ error: $v.event.time.required }"
+        @blur="$v.event.time.$touch()"
+      />
+      <template v-if="$v.event.time.$error">
+        <p v-if="!$v.event.time.required" class="errorMessage">
+          A time is required.
+        </p>
+      </template>
+
       <BaseButton type="submit" buttonClass="-fill-gradient">Submit</BaseButton>
     </form>
   </div>
@@ -43,6 +68,7 @@
 <script>
 import Datepicker from 'vuejs-datepicker'
 import NProgress from 'nprogress'
+import { required } from 'vuelidate/lib/validators'
 
 export default {
   components: {
@@ -57,6 +83,16 @@ export default {
       event: this.createFreshEvent(),
       times,
       categories: this.$store.state.categories
+    }
+  },
+  validations: {
+    event: {
+      category: { required },
+      title: { required },
+      description: { required },
+      location: { required },
+      date: { required },
+      time: { required }
     }
   },
   methods: {
