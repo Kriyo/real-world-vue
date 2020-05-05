@@ -22,14 +22,29 @@
         placeholder="Title"
         v-model="event.title"
         class="field"
+        :class="{ error: $v.event.title.$error }"
+        @blur="$v.event.title.$touch()"
       />
+      <template v-if="$v.event.title.$error">
+        <p v-if="!$v.event.title.required" class="errorMessage">
+          A title is required.
+        </p>
+      </template>
+
       <BaseInput
         label="Description"
         type="text"
         placeholder="Description"
         v-model="event.description"
         class="field"
+        :class="{ error: $v.event.description.$error }"
+        @blur="$v.event.description.$touch()"
       />
+      <template v-if="$v.event.description.$error">
+        <p v-if="!$v.event.description.required" class="errorMessage">
+          A description is required.
+        </p>
+      </template>
 
       <h3>Where is your event?</h3>
       <BaseInput
@@ -38,7 +53,14 @@
         placeholder="Location"
         v-model="event.location"
         class="field"
+        :class="{ error: $v.event.location.$error }"
+        @blur="$v.event.location.$touch()"
       />
+      <template v-if="$v.event.location.$error">
+        <p v-if="!$v.event.location.required" class="errorMessage">
+          A location is required.
+        </p>
+      </template>
 
       <h3>When is your event?</h3>
       <div class="field">
