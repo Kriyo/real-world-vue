@@ -18,6 +18,7 @@
         v-model="event.description"
         class="field"
       />
+
       <h3>Where is your event?</h3>
       <BaseInput
         label="Location"
@@ -26,13 +27,15 @@
         v-model="event.location"
         class="field"
       />
+
       <h3>When is your event?</h3>
       <div class="field">
         <label>Date</label>
         <datepicker v-model="event.date" placeholder="Select a date" />
       </div>
+
       <BaseSelect label="Select a time" v-model="event.time" :options="times" class="field" />
-      <input type="submit" class="button -fill-gradient" value="Submit" />
+      <BaseButton type="submit" buttonClass="-fill-gradient">Submit</BaseButton>
     </form>
   </div>
 </template>
